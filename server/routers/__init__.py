@@ -1,14 +1,11 @@
 """
-This is the routes module, it contains one FastAPI.APIRouter for each model:
+This is the routes module, it contains one FastAPI.APIRouter for each submodule:
     Category
     Marketplace
     Product
     Seller
 
+The `router` of each submodule is then attached to the main app at ../main.py.
 
-Examples:
-    user.py contains APIRouter(prefix='user')
-    seller.py contains APIRouter(prefix='seller')
-
-So at the main.py, each Router is attached to the main app.
+Read more about it at ../__init__.py.
 """

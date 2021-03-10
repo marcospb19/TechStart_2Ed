@@ -1,4 +1,5 @@
 from fastapi import APIRouter
+from controllers import marketplace
 
 router = APIRouter(
     prefix='/marketplace',
@@ -6,6 +7,21 @@ router = APIRouter(
 )
 
 
+@router.post('/')
+def create():
+    marketplace.create()
+
+
 @router.get('/')
-def hello():
-    return 'hello marketplace'
+def show():
+    marketplace.show()
+
+
+@router.put('/')
+def update():
+    marketplace.update()
+
+
+@router.delete('/')
+def delete():
+    marketplace.delete()

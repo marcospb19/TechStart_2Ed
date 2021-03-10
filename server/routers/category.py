@@ -1,4 +1,5 @@
 from fastapi import APIRouter
+from controllers import category
 
 router = APIRouter(
     prefix='/category',
@@ -6,6 +7,21 @@ router = APIRouter(
 )
 
 
+@router.post('/')
+def create():
+    category.create()
+
+
 @router.get('/')
-def hello():
-    return 'hello category'
+def show():
+    category.show()
+
+
+@router.put('/')
+def update():
+    category.update()
+
+
+@router.delete('/')
+def delete():
+    category.delete()

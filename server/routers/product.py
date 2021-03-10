@@ -1,4 +1,5 @@
 from fastapi import APIRouter
+from controllers import product
 
 router = APIRouter(
     prefix='/product',
@@ -6,6 +7,21 @@ router = APIRouter(
 )
 
 
+@router.post('/')
+def create():
+    product.create()
+
+
 @router.get('/')
-def hello():
-    return 'hello product'
+def show():
+    product.show()
+
+
+@router.put('/')
+def update():
+    product.update()
+
+
+@router.delete('/')
+def delete():
+    product.delete()
