@@ -17,7 +17,7 @@ Através dos endpoints:
 
 Veja mais sobre na camada visual.
 
-A especificação completa do desafio está em [specification.md](./specification.md).
+A especificação completa do desafio está em [SPECIFICATION.md](./SPECIFICATION.md).
 
 ## Tecnologias utilizadas
 Dependências utilizadas:
