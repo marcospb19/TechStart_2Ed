@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 import db
 import uvicorn
+import documentation
 
 # Import routers that compose the app endpoints
 from routers import category, marketplace, product, seller
@@ -10,6 +11,8 @@ db.init_db()
 
 # Main app
 app = FastAPI()
+# Main app (plus docs)
+app = FastAPI(**documentation.FASTAPI_APP_DOCUMENTATION)
 
 # Attach each router to the main app
 app.include_router(category.router)
