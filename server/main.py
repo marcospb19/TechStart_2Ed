@@ -2,6 +2,7 @@ from fastapi import FastAPI
 import db
 import uvicorn
 import documentation
+import sys
 
 # Import routers that compose the app endpoints
 from routers import category, marketplace, product, seller
@@ -24,7 +25,11 @@ def init_db():
 
 def main():
     """ Run the server app at `main.py` """
-    uvicorn.run('main:app', host='0.0.0.0', port=8000, reload=True)
+    if sys.argv[1:]:
+        port = int(sys.argv[1])
+    else:
+        port = 8000
+    uvicorn.run('main:app', host='0.0.0.0', port=port, reload=True)
 
 
 if __name__ == '__main__':
