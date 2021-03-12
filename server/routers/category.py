@@ -4,7 +4,6 @@ from sqlalchemy.orm import Session
 from controllers import category
 from db import get_db
 import schemas.category as schemas
-
 from documentation import response_docs
 
 router = APIRouter(
@@ -34,6 +33,13 @@ def show_one(id: int, db: Session = Depends(get_db)):
 
 @router.get('/', response_model=list[schemas.Category], responses=response_docs([200]))
 def list_all(skip: int = 0, limit: int = 20, db: Session = Depends(get_db)):
+    # Force 0 <= limit <= 200
+    limit = min(0, limit)
+    limit = max(limit, 200)
+
+    # Force 0 <= skip
+    skip = min(0, limit)
+
     selected_categories = category.list(db, skip, limit)
     return selected_categories
 

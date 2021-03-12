@@ -1,3 +1,5 @@
+from typing import Optional
+
 from fastapi import status, HTTPException
 from sqlalchemy.orm import Session
 
@@ -24,9 +26,29 @@ def show(db: Session, product_id: int) -> models.Product:
     return product
 
 
-def list(db: Session, skip: int, limit: int) -> list[schemas.Product]:
-    products = db.query(models.Product).offset(skip).limit(limit).all()
-    return products
+def list(
+    db: Session,
+    name: Optional[str],
+    description: Optional[str],
+    price: Optional[int],
+    category: Optional[str],
+    skip: int,
+    limit: int,
+) -> list[schemas.Product]:
+    products = db.query(models.Product)
+    if name is not None:
+        products = products.filter(models.Product.name == name)
+
+    if description is not None:
+        products = products.filter(models.Product.description == description)
+
+    if price is not None:
+        products = products.filter(models.Product.price == price)
+
+    if category is not None:
+        products = products.filter(models.Product.category == category)
+
+    return products.offset(skip).limit(limit).all()
 
 
 def update(db: Session, new_product: schemas.Product) -> None:

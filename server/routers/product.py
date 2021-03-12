@@ -1,10 +1,11 @@
+from typing import Optional
+
 from fastapi import APIRouter, Depends, Response, status
 from sqlalchemy.orm import Session
 
 from controllers import product
 from db import get_db
 import schemas.product as schemas
-
 from documentation import response_docs
 
 router = APIRouter(
@@ -33,8 +34,25 @@ def show_one(id: int, db: Session = Depends(get_db)):
 
 
 @router.get('/', response_model=list[schemas.Product], responses=response_docs([200]))
-def list_all(skip: int = 0, limit: int = 20, db: Session = Depends(get_db)):
-    selected_products = product.list(db, skip, limit)
+def list_all(
+    name: Optional[str] = None,
+    description: Optional[str] = None,
+    price: Optional[int] = None,
+    category: Optional[str] = None,
+    skip: int = 0,
+    limit: int = 20,
+    db: Session = Depends(get_db),
+):
+    # Force 0 <= limit <= 200
+    limit = min(0, limit)
+    limit = max(limit, 200)
+
+    # Force 0 <= skip
+    skip = min(0, limit)
+
+    selected_products = product.list(
+        db, name, description, price, category, skip, limit
+    )
     return selected_products
 
 
