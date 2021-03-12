@@ -6,11 +6,6 @@ import documentation
 # Import routers that compose the app endpoints
 from routers import category, marketplace, product, seller
 
-# Initializing the database
-db.init_db()
-
-# Main app
-app = FastAPI()
 # Main app (plus docs)
 app = FastAPI(**documentation.FASTAPI_APP_DOCUMENTATION)
 
@@ -19,6 +14,12 @@ app.include_router(category.router)
 app.include_router(marketplace.router)
 app.include_router(product.router)
 app.include_router(seller.router)
+
+
+# Initialize the database before running app
+@app.on_event('startup')
+def init_db():
+    db.init_db()
 
 
 def main():
