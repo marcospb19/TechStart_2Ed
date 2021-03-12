@@ -1,3 +1,4 @@
+from typing import Optional
 from pydantic import BaseModel
 
 
@@ -5,7 +6,7 @@ class ProductBase(BaseModel):
     name: str
     description: str
     price: int
-    category: int  # id
+    category: Optional[str] = None
 
 
 class ProductCreate(ProductBase):

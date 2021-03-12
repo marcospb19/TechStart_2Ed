@@ -1,3 +1,4 @@
+from typing import Optional
 from pydantic import BaseModel
 
 
@@ -6,8 +7,8 @@ class MarketplaceBase(BaseModel):
     description: str
     website: str
     contact_email: str
-    contact_phone: str = ''
-    technical_support_contact: str = ''
+    contact_phone: Optional[str] = None
+    technical_support_contact: Optional[str] = None
 
 
 class MarketplaceCreate(MarketplaceBase):

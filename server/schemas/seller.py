@@ -1,3 +1,4 @@
+from typing import Optional
 from pydantic import BaseModel
 
 
@@ -7,7 +8,7 @@ class SellerBase(BaseModel):
     cnpj: str
     full_address: str
     email_contact: str
-    contact_phone: str = ''
+    contact_phone: Optional[str] = None
 
 
 class SellerCreate(SellerBase):

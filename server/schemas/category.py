@@ -1,9 +1,10 @@
+from typing import Optional
 from pydantic import BaseModel
 
 
 class CategoryBase(BaseModel):
     name: str
-    description: str = ''
+    description: Optional[str] = None
 
 
 class CategoryCreate(CategoryBase):
